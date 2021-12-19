@@ -73,11 +73,12 @@ class FaceEmbedNet(nn.Module):
 class Classifier(nn.Module):
     def __init__(self, input_channel, channels, output_channel):
         super(Classifier, self).__init__()
-        self.model = nn.Linear(input_channel, output_channel, bias=False)
-
+        self.layer1 = nn.Linear(input_channel, channels[0], bias=False)
+        self.layer2  = nn.Linear(channels[0], output_channel, bias = False)
     def forward(self, x):
         x = x.view(x.size()[0], -1)
-        x = self.model(x)
+        x = self.layer1(x)
+        x = self.layer2(x)
         return x
 
 def get_network(net_type, params, train=True):

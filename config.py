@@ -22,7 +22,7 @@ DATASET_PARAMETERS = {
     # dataloader
     'voice_dataset': VoiceDataset,
     'face_dataset': FaceDataset,
-    'batch_size': 128,
+    'batch_size': 128, # 2, 32, 64
     'nframe_range': [300, 800],
     'workers_num': 1,
     'collate_fn': get_collate_fn,
@@ -45,7 +45,7 @@ NETWORKS_PARAMETERS = {
     'g': {
         'network': Generator,
         'input_channel': 64,
-        'channels': [1024, 512, 256, 128, 64], # channels for deconvolutional layers
+        'channels': [2048, 1024, 512, 256, 128], # channels for deconvolutional layers
         'output_channel': 3, # images with RGB channels
         'model_path': 'models/generator.pth',
     },
@@ -61,7 +61,7 @@ NETWORKS_PARAMETERS = {
     'd': {
         'network': Classifier, # Discrminator is a special Classifier with 1 subject
         'input_channel': 64,
-        'channels': [],
+        'channels': [256],
         'output_channel': 1,
         'model_path': 'models/discriminator.pth',
     },
@@ -69,7 +69,7 @@ NETWORKS_PARAMETERS = {
     'c': {
         'network': Classifier,
         'input_channel': 64,
-        'channels': [],
+        'channels': [256],
         'output_channel': -1, # This parameter is depended on the dataset we used
         'model_path': 'models/classifier.pth',
     },
